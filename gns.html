@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bella Güneş Sokak Hayvanları Yardımcısı</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1, h2, h3 {
+            text-align: center;
+        }
+        .hayvan-listesi, .mama-noktalari {
+            list-style-type: none;
+            padding: 0;
+        }
+        .hayvan-elemani, .mama-noktasi {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        button {
+            background-color: #4CAF50; /* Yeşil */
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .acil-bildirim {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .sosyal-paylasim {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .egitim-bilinclendirme {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .sahiplendirme-ilan {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .etkinlik-kampanya {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .istatistik-hikaye {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .geri-bildirim {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Bella Güneş Sokak Hayvanları Yardımcısı</h1>
+
+    <h2>Hayvanlar</h2>
+    <ul class="hayvan-listesi" id="hayvan-listesi">
+        <!-- Hayvan elemanları buraya eklenecek -->
+    </ul>
+
+    <h2>Mama Noktaları</h2>
+    <ul class="mama-noktalari" id="mama-noktalari">
+        <!-- Mama noktaları buraya eklenecek -->
+    </ul>
+
+    <div class="stok-yenileme">
+        <h3>Stok Yenileme Talebi</h3>
+        <label for="hayvan-turu-talep">Stok Yenileme Yapılacak Hayvan Türü:</label>
+        <select id="hayvan-turu-talep">
+            <option value="Tümü">Tümü</option>
+            <option value="Kedi">Kedi</option>
+            <option value="Köpek">Köpek</option>
+            <option value="Kuş">Kuş</option>
+        </select>
+        <button onclick="stokYenilemeTalebi()">Stok Yenileme Talebi</button>
+    </div>
+
+    <div class="bagis">
+        <h3>Bağış Yap</h3>
+        <label for="bagis-miktari">Bağış Miktarı (kg):</label>
+        <input type="number" id="bagis-miktari" placeholder="Bağış miktarı (kg)" min="1">
+        <br><br>
+        <label for="hayvan-turu">Bağış Yapılacak Hayvan Türü:</label>
+        <select id="hayvan-turu">
+            <option value="Kedi">Kedi</option>
+            <option value="Köpek">Köpek</option>
+            <option value="Kuş">Kuş</option>
+        </select>
+        <br><br>
+        <button onclick="bagisYap()">Bağış Yap</button>
+    </div>
+
+    <div class="acil-bildirim">
+        <h3>Acil Durum Bildirimi</h3>
+        <button onclick="acilDurumBildir()">Acil Durum Bildir</button>
+    </div>
+
+    <div class="sosyal-paylasim">
+        <h3>Sosyal Paylaşım</h3>
+        <button onclick="sosyalPaylasim()">Sosyal Medyada Paylaş</button>
+    </div>
+
+    <div class="egitim-bilinclendirme">
+        <h3>Eğitim ve Bilinçlendirme</h3>
+        <button onclick="egitimBilinclendirme()">Eğitim Al</button>
+    </div>
+
+    <div class="sahiplendirme-ilan">
+        <h3>Sahiplendirme İlan Platformu</h3>
+        <button onclick="sahiplendirmeIlan()">Sahiplendirme İlanı Ver</button>
+    </div>
+
+    <div class="etkinlik-kampanya">
+        <h3>Etkinlik ve Kampanya Duyuruları</h3>
+        <button onclick="etkinlikKampanya()">Etkinlikleri ve Kampanyaları Gör</button>
+    </div>
+
+    <div class="istatistik-hikaye">
+        <h3>İstatistikler ve Başarı Hikayeleri</h3>
+        <button onclick="istatistikHikaye()">İstatistikleri ve Hikayeleri Gör</button>
+    </div>
+
+    <div class="geri-bildirim">
+        <h3>Geri Bildirim</h3>
+        <textarea id="geri-bildirim" placeholder="Geri bildiriminizi buraya yazın..." rows="4" cols="50"></textarea><br>
+        <button onclick="geriBildirimGonder()">Geri Bildirim Gönder</button>
+    </div>
+
+    <script>
+        // Hayvan ve mama noktası verileri
+        const hayvanlar = [
+            { tur: 'Kedi', mamaStoku: 50 },
+            { tur: 'Köpek', mamaStoku: 30 },
+            { tur: 'Kuş', mamaStoku: 20 }
+        ];
+
+        const mamaNoktalari = [
+            { stok: 50 },
+            { stok: 30 },
+            { stok: 20 }
+        ];
+
+        // Hayvanları listeye ekleme
+        const hayvanListesi = document.getElementById('hayvan-listesi');
+        hayvanlar.forEach((hayvan, index) => {
+            const li = document.createElement('li');
+            li.className = 'hayvan-elemani';
+            li.innerHTML = `
+                <strong>Tür:</strong> ${hayvan.tur}<br>
+                <strong>Mama Stoku:</strong> <span id="mama-stoku-${index}">${hayvan.mamaStoku}</span> kg<br>
+                <div class="mama-talebi">
+                    <input type="number" id="mama-miktari-${index}" placeholder="Miktar (kg)" min="1">
+                    <button onclick="yardimTalepEt(${index})">Yardım Talep Et</button>
+                </div>
+            `;
+            hayvanListesi.appendChild(li);
+        });
+
+        // Mama noktalarını listeye ekleme
+        const mamaNoktalariListesi = document.getElementById('mama-noktalari');
+        mamaNoktalari.forEach((nokta, index) => {
+            const li = document.createElement('li');
+            li.className = 'mama-noktasi';
+            li.innerHTML = `
+                <strong>Mama Noktası ${index + 1} Stok:</strong> <span id="mama-stok-nokta-${index}">${nokta.stok}</span> kg
+            `;
+            mamaNoktalariListesi.appendChild(li);
+        });
+
+        // Yardım talebi işlevi
+        function yardimTalepEt(index) {
+            const hayvan = hayvanlar[index];
+            const mamaMiktariInput = document.getElementById(`mama-miktari-${index}`);
+            const talepMiktari = parseInt(mamaMiktariInput.value);
+
+            if (isNaN(talepMiktari) || talepMiktari <= 0) {
+                alert("Lütfen geçerli bir miktar girin.");
+            } else {
+                if (talepMiktari <= hayvan.mamaStoku) {
+                    hayvan.mamaStoku -= talepMiktari;
+                    document.getElementById(`mama-stoku-${index}`).textContent = hayvan.mamaStoku;
+                    alert(`${hayvan.tur} için ${talepMiktari} kg mama talebi gönderildi. Yeni stok: ${hayvan.mamaStoku} kg`);
+                    mamaMiktariInput.value = ''; // Input alanını temizle
+                } else {
+                    alert("Yeterli mama stoku bulunmamaktadır.");
+                }
+            }
+        }
+
+        // Stok yenileme talebi işlevi
+        function stokYenilemeTalebi() {
+            const hayvanTuru = document.getElementById('hayvan-turu-talep').value;
+            const miktar = 5; // Her talepte 5 kg eklenmesi
+
+            if (hayvanTuru === 'Tümü') {
+                // Tüm hayvan türleri için stok yenileme talebi
+                hayvanlar.forEach(hayvan => {
+                    hayvan.mamaStoku += miktar;
+                    const index = hayvanlar.indexOf(hayvan);
+                    document.getElementById(`mama-stoku-${index}`).textContent = hayvan.mamaStoku;
+                    alert(`${hayvan.tur} için stok yenileme talebi gönderildi. Yeni stok: ${hayvan.mamaStoku} kg`);
+                });
+            } else {
+                // Belirli bir hayvan türü için stok yenileme talebi (parametre olarak gelen hayvan türü)
+                const seciliHayvan = hayvanlar.find(hayvan => hayvan.tur === hayvanTuru);
+                if (seciliHayvan) {
+                    seciliHayvan.mamaStoku += miktar;
+                    const index = hayvanlar.indexOf(seciliHayvan);
+                    document.getElementById(`mama-stoku-${index}`).textContent = seciliHayvan.mamaStoku;
+                    alert(`${seciliHayvan.tur} için stok yenileme talebi gönderildi. Yeni stok: ${seciliHayvan.mamaStoku} kg`);
+                } else {
+                    alert(`Belirtilen hayvan türü bulunamadı.`);
+                }
+            }
+        }
+
+        // Geri bildirim gönderme işlevi
+        function geriBildirimGonder() {
+            const geriBildirim = document.getElementById('geri-bildirim').value;
+            if (geriBildirim.trim() === '') {
+                alert("Lütfen geri bildirim metnini girin.");
+            } else {
+                alert("Geri bildiriminiz başarıyla gönderildi. Teşekkür ederiz!");
+                document.getElementById('geri-bildirim').value = ''; // Input alanını temizle
+            }
+        }
+
+        // Bağış yapma işlevi
+        function bagisYap() {
+            const bagisMiktariInput = document.getElementById('bagis-miktari');
+            const bagisMiktari = parseInt(bagisMiktariInput.value);
+            const secilenHayvan = document.getElementById('hayvan-turu').value;
+
+            if (isNaN(bagisMiktari) || bagisMiktari <= 0) {
+                alert("Lütfen geçerli bir miktar girin.");
+            } else {
+                // Seçilen hayvan türüne göre işlem yapılabilir
+                alert(`${bagisMiktari} kg ${secilenHayvan} için mama bağışınız alınmıştır. Sokak hayvanları adına teşekkür ederiz!`);
+                bagisMiktariInput.value = ''; // Input alanını temizle
+            }
+        }
+
+        // Acil durum bildirimi işlevi
+        function acilDurumBildir() {
+            alert("Acil durum bildirimi başarıyla gönderildi. En yakın yetkili kişi bilgilendirilecektir.");
+        }
+
+        // Sosyal paylaşım işlevi
+        function sosyalPaylasim() {
+            alert("Gönderiniz sosyal medyada paylaşıldı. Sokak hayvanları için farkındalık oluşturduğunuz için teşekkür ederiz!");
+        }
+
+        // Eğitim ve bilinçlendirme işlevi
+        function egitimBilinclendirme() {
+            alert("Eğitim ve bilinçlendirme içeriği başarıyla yüklendi. Sokak hayvanları hakkında daha fazla bilgi edinmek için bizi takip etmeye devam edin.");
+        }
+
+        // Sahiplendirme ilanı işlevi
+        function sahiplendirmeIlan() {
+            alert("Sahiplendirme ilanı başarıyla oluşturuldu. Sahiplenmek isteyenler ilanınıza başvuru yapabilecekler.");
+        }
+
+        // Etkinlik ve kampanya işlevi
+        function etkinlikKampanya() {
+            alert("Etkinlikler ve kampanyalar hakkında bilgiler başarıyla yüklendi. Sokak hayvanlarına yapılan katkılarınız için teşekkür ederiz.");
+        }
+
+        // İstatistik ve hikaye işlevi
+        function istatistikHikaye() {
+            alert("Sokak hayvanları için yapılan bağış istatistikleri ve başarı hikayeleri başarıyla yüklendi. Katkılarınızı görmek bizi mutlu ediyor.");
+        }
+    </script>
+</body>
+</html>
